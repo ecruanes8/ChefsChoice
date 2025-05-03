@@ -12,6 +12,7 @@ def home():
 
 @app.get("/recipes/search_recipe_by_ingredients")
 def search_by_ingredients(ingredients:list[str]): 
+    recipes = search_recipe_by_ingredients(ingredients)
     return {"Recipes :": recipes}
 
 @app.get("/recipes/search_recipe")

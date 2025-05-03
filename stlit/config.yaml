@@ -1,0 +1,25 @@
+cookie:
+  expiry_days: 30
+  key: "t9d1ygha4suuy5mhjefykf69rzf1ek23"
+  name: "Eve"
+
+credentials:
+  usernames:
+    ecruanes:
+      name: "Eve Cruanes"
+      email: eve.cruanes@gmail.com
+      failed_login_attempts: 0
+      logged_in: False
+      password: test
+      roles:
+        - admin
+        - editor
+        - viewer
+    rbriggs:
+      name: "Rebecca Briggs"
+      email: rbriggs@gmail.com
+      failed_login_attempts: 0
+      logged_in: False
+      password: def
+      roles:
+        - viewer
