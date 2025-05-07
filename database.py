@@ -13,11 +13,17 @@ collection = db["user_preferences"]
 # CRUD 
 
 # CREATE
+
 def add_user(user_id): 
     """Add a new user to the database."""
     user_data = { 
-        "_id": user_id, 
-        "preferences": [], 
+        "_id": user_id,
+        "preferences":{ 
+            "ingredients": [], 
+            "cuisine":[],
+            "intolerances": [], 
+            "diet":[]
+        } ,
         "recipe_history": []
     }
     try: 
@@ -37,14 +43,15 @@ def get_user(user_id):
         print(f"Error retrieving user: {e}")
         return None
 
-
 def get_user_preferences(user_id): 
     """Get user preferences"""
     try: 
-        prefs = collection.find_one({"_id":user_id})
+        user = collection.find_one({"_id": user_id})
+        return user.get("preferences", {}) if user else []
     except Exception as e: 
         print(f"Error getting preferences: {e}") 
-        return None
+        return {}
+
     
 def get_user_history(user_id): 
     """Get user history"""
@@ -80,3 +87,15 @@ def remove_user(user_id):
     """Remove user from database"""
     result = collection.delete_one({"user_id": user_id})
     return result.deleted_count>0
+
+
+def print_all_users(): 
+    """Print all documents in the user_preferences collection."""
+    try:
+        users = list(collection.find({}))
+        for user in users:
+            print(user)
+        return users
+    except Exception as e:
+        print(f"Error retrieving all users: {e}")
+        return []

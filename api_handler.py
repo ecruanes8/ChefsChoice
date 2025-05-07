@@ -18,7 +18,7 @@ def search_recipe_by_ingredients(ingredients,number_of_recipes):
         "ranking": 1, 
         "apiKey": SPOONACULAR_API_KEY
     }
-    response = response.get(url, params=params)
+    response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()
 
@@ -29,10 +29,20 @@ def search_recipe(query="",cuisine=None,diet=None, intolerances=None,number=None
         "cuisine": cuisine, 
         "diet": diet,
         "intolerances":intolerances,
-        "number":number
+        "number":number,
+        "apiKey": SPOONACULAR_API_KEY
     }
     params = {k: v for k, v in params.items() if v is not None}
     
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+    return response.json()
+
+def get_recipe(recipe_id): 
+    url = f"{BASE_URL}/recipes/{recipe_id}/information"
+    params={ 
+        "id":recipe_id
+    }
     response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()
